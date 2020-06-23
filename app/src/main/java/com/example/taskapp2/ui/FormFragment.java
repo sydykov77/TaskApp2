@@ -22,7 +22,6 @@ public class FormFragment extends Fragment {
     private FloatingActionButton fab;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,8 +33,8 @@ public class FormFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        editTitle=view.findViewById(R.id.editTitle);
-        editDesc=view.findViewById(R.id.editDesc);
+        editTitle = view.findViewById(R.id.editTitle);
+        editDesc = view.findViewById(R.id.editDesc);
         view.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
