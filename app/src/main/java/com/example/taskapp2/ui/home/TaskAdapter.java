@@ -14,19 +14,18 @@ import com.example.taskapp2.R;
 import com.example.taskapp2.models.Task;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private ArrayList<Task> list;
 
-    public TaskAdapter(ArrayList<Task> list){
-        this.list=list;
+    public TaskAdapter(ArrayList<Task> list) {
+        this.list = list;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_task,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_task, parent, false);
         return new ViewHolder(view);
     }
 
@@ -47,7 +46,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView textTitle;
 
         public ViewHolder(@NonNull View itemView) {
@@ -55,7 +54,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder>{
             textTitle = itemView.findViewById(R.id.textTitle);
         }
 
-        public void bind(Task task){
+        public void bind(Task task) {
             textTitle.setText(task.getTitle());
         }
     }
