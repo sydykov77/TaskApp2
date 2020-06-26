@@ -1,14 +1,17 @@
 package com.example.taskapp2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.taskapp2.models.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -22,15 +25,14 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private NavController navController;
-    private FloatingActionButton fab;
+    FloatingActionButton fab;
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initialisation();
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
         initNavController();
         if (!new Prefs(this).isShown()) navController.navigate(R.id.boardFragment);
 
+    }
+
+    private void initialisation() {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     private void initNavController() {
@@ -66,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     toolbar.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        getSupportFragmentManager().setFragmentResultListener("form", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                Log.e("RESULT", "requestKey2" + requestKey);
             }
         });
     }

@@ -26,7 +26,6 @@ public class BoardFragment extends Fragment {
     TabLayout tabLayout;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,38 +38,8 @@ public class BoardFragment extends Fragment {
         initialisation(view);
         setOnClickListeners();
         viewPager.setAdapter(pageAdapter);
+        tabLayout.setupWithViewPager(viewPager, true);
         onBackPressedCallback();
-        buttonSkip = view.findViewById(R.id.btn_skip);
-        buttonSkip.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                viewPager.setCurrentItem(2);
-                buttonSkip.setVisibility(View.INVISIBLE);
-            }
-        });
-        tabLayout = view.findViewById(R.id.tabLayout);
-        tabLayout.setupWithViewPager(viewPager,true);
-        onBackPressedCallback();
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-            if (position == 2){
-                buttonSkip.setVisibility(View.GONE);
-            }else{
-                buttonSkip.setVisibility(View.VISIBLE);
-            }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
 
     }
 
@@ -88,6 +57,35 @@ public class BoardFragment extends Fragment {
 
     private void setOnClickListeners() {
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 2) {
+                    buttonSkip.setVisibility(View.GONE);
+                } else {
+                    buttonSkip.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        buttonSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(2);
+                buttonSkip.setVisibility(View.INVISIBLE);
+            }
+        });
+
         pageAdapter.setOnStartClickLListener(new PageAdapter.onStartClickLListener() {
             @Override
             public void onStart() {
@@ -101,6 +99,9 @@ public class BoardFragment extends Fragment {
     private void initialisation(View view) {
         pageAdapter = new PageAdapter();
         viewPager = view.findViewById(R.id.viewPager);
-        pageAdapter = new PageAdapter();
+        buttonSkip = view.findViewById(R.id.btn_skip);
+        tabLayout = view.findViewById(R.id.tabLayout);
+
+
     }
 }

@@ -18,7 +18,7 @@ public class Prefs {
                 .apply();
     }
 
-    boolean isShown(){
+    boolean isShown() {
         return sharedPreferences.getBoolean("isShown", false);
     }
 

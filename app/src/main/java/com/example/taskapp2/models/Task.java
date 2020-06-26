@@ -1,8 +1,27 @@
 package com.example.taskapp2.models;
 
-public class Task {
-    private String title;
-    private String desc;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
+
+@Entity
+public class Task implements Serializable {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    public String title;
+    public String desc;
+
+    public Task() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

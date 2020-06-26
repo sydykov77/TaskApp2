@@ -24,8 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="TITLE"
-            android:textColor="@color/BLACK"
             android:textAlignment="center"
+            android:textColor="@color/BLACK"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#3F5EFF"
-        android:textColor="@color/colorWhite"
-        android:text="GET STARTED" />
+        android:text="GET STARTED"
+        android:textColor="@color/colorWhite" />
 
 </RelativeLayout>
