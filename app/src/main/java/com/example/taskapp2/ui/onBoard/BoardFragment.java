@@ -51,6 +51,26 @@ public class BoardFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager,true);
         onBackPressedCallback();
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+            if (position == 2){
+                buttonSkip.setVisibility(View.GONE);
+            }else{
+                buttonSkip.setVisibility(View.VISIBLE);
+            }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
