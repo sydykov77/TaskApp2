@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +18,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.taskapp2.App;
 import com.example.taskapp2.R;
 import com.example.taskapp2.models.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
-public class FormFragment extends Fragment  {
+public class FormFragment extends Fragment {
     private EditText editTitle;
     private EditText editDesc;
     private FloatingActionButton floatingActionButton;
@@ -64,11 +64,12 @@ public class FormFragment extends Fragment  {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                Task task= new Task(editTitle.getText().toString().trim(), editDesc.getText().toString().trim());
+                Task task = new Task(editTitle.getText().toString().trim(), editDesc.getText().toString().trim());
                 if (task.getTitle().isEmpty()) {
                     Toast.makeText(getActivity(), "Введите title!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                App.getInstance().getDatabase().taskDao().insert(task);
                 Bundle bundle = new Bundle();
                 bundle.putInt("position", position);
                 bundle.putSerializable("task", task);
@@ -76,9 +77,9 @@ public class FormFragment extends Fragment  {
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
 
-                InputMethodManager inputManager = (InputMethodManager) requireContext(). getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager inputManager = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 assert inputManager != null;
-                inputManager.hideSoftInputFromWindow( Objects.requireNonNull(requireActivity().getCurrentFocus()).getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                inputManager.hideSoftInputFromWindow(Objects.requireNonNull(requireActivity().getCurrentFocus()).getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 navController.navigateUp();
             }
         });
